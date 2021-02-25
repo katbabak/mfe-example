@@ -5,5 +5,19 @@
     <li><a routerLink="/charts">Charts</a></li>
 </ul>
 
+<h2>Currency: {{ (currentCurrency$ | async) }}</h2>
+<h2>Com Subj Curr: {{ (communicationActionSubject$ | async)?.currency }}</h2>
+<button (click)="setDefaultCurrency()">Set Default Currency (CHF)</button>
+<div>
+  <h5>Chart 1</h5>
+  <div #chartView1></div>
+</div>
+
+<div>
+  <h5>Chart 2</h5>
+  <div #chartView2></div>
+</div>
+
+<hr>
 <router-outlet></router-outlet>
 

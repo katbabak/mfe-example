@@ -1,0 +1,1 @@
+{"version":3,"file":"mfe-component.d.ts","sourceRoot":"/Users/katebabak/Desktop/work/lo-dx/projects/gx-core/src/","sources":["lib/intefaces/mfe-component.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAE,MAAM,MAAM,CAAA;AAEtC,OAAO,EAAE,OAAO,EAAE,MAAM,kBAAkB,CAAA;AAE1C,MAAM,WAAW,aAAa;IAC3B,uBAAuB,EAAE,CAAC,OAAO,EAAE,eAAe,CAAC,OAAO,CAAC,KAAK,IAAI,CAAA;CACtE"}

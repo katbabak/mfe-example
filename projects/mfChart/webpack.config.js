@@ -23,6 +23,7 @@ module.exports = {
         filename: "remoteEntry.js",
         exposes: {
             './Module': './projects/mfChart/src/app/chart-example/chart-example.module.ts',
+            './ChartComponent': './projects/mfChart/src/app/chart-example/chart-example.component.ts',
         },
 
         // For hosts (please adjust)

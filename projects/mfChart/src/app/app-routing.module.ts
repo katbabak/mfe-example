@@ -5,7 +5,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./chart-example/chart-example.module').then(m => m.ChartExampleModule),
-    // pathMatch: 'full',
   }
 ];
 

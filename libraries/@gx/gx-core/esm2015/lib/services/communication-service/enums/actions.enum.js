@@ -1,0 +1,5 @@
+export var Actions;
+(function (Actions) {
+    Actions["UpdateCurrency"] = "Update Currency";
+})(Actions || (Actions = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWN0aW9ucy5lbnVtLmpzIiwic291cmNlUm9vdCI6Ii9Vc2Vycy9rYXRlYmFiYWsvRGVza3RvcC93b3JrL2xvLWR4L3Byb2plY3RzL2d4LWNvcmUvc3JjLyIsInNvdXJjZXMiOlsibGliL3NlcnZpY2VzL2NvbW11bmljYXRpb24tc2VydmljZS9lbnVtcy9hY3Rpb25zLmVudW0udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFOLElBQVksT0FFWDtBQUZELFdBQVksT0FBTztJQUNqQiw2Q0FBa0MsQ0FBQTtBQUNwQyxDQUFDLEVBRlcsT0FBTyxLQUFQLE9BQU8sUUFFbEIiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZW51bSBBY3Rpb25zIHtcbiAgVXBkYXRlQ3VycmVuY3kgPSAnVXBkYXRlIEN1cnJlbmN5Jyxcbn1cbiJdfQ==

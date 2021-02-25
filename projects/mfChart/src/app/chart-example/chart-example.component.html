@@ -1,2 +1,8 @@
-<div>Chart example</div>
-<div #chartContainer></div>
+<div class="chart-container">
+  <h4 class="chart-container-title">Chart</h4>
+  <div>
+    <p>Currency - {{ (currency$ | async) }}</p>
+    <button (click)="changeCurrency()">Change To Random Currency</button>
+  </div>
+  <div #chartContainer></div>
+</div>

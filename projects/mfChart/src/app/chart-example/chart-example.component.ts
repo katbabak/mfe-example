@@ -1,68 +1,34 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Injector, OnInit, ViewChild} from '@angular/core';
 import * as Highcharts from 'highcharts';
-import * as Exporting from 'highcharts/modules/exporting';
-import {Options} from "highcharts";
+import {Actions, CommunicationService, IAction, IMFEComponent} from "gx-core";
+import {BehaviorSubject, Observable} from "rxjs";
+import {ActivatedRoute} from '@angular/router';
+import {filter, map} from "rxjs/operators";
 
-// Exporting(Highcharts);
+const CURRENCIES = ['CHF', 'USD', 'UAH', 'RUB', 'JPY', 'EUR', 'GBP', 'AUD', 'DZD', 'ARS', 'BTN', 'BOB', 'BAM', 'CZK'];
 
 @Component({
   selector: 'app-chart-example',
-  templateUrl: './chart-example.component.html'
+  templateUrl: './chart-example.component.html',
+  styleUrls: ['./chart-example.component.css'],
 })
-export class ChartExampleComponent implements AfterViewInit {
+export class ChartExampleComponent implements AfterViewInit, OnInit, IMFEComponent {
   @ViewChild('chartContainer') public container: ElementRef;
+  public currency$: Observable<string>;
 
-  public options: any = {
-    chart: {
-      type: 'scatter',
-      height: 700
-    },
-    title: {
-      text: 'Sample Scatter Plot'
-    },
-    credits: {
-      enabled: false
-    },
-    tooltip: {
-      formatter: function() {
-        return 'x: ' + Highcharts.dateFormat('%e %b %y %H:%M:%S', this.x) +
-          'y: ' + this.y.toFixed(2);
-      }
-    },
-    xAxis: {
-      type: 'datetime',
-      labels: {
-        formatter: function() {
-          return Highcharts.dateFormat('%e %b %y', this.value);
-        }
-      }
-    },
-    series: [
-      {
-        name: 'Normal',
-        turboThreshold: 500000,
-        data: []
-      },
-      {
-        name: 'Abnormal',
-        turboThreshold: 500000,
-        data: []
-      }
-    ]
-  };
-  public optVersion2: any = {
+  public chartOptions: any = {
     chart: {
       type: 'bar'
     },
     title: {
-      text: 'Fruit Consumption'
+      text: 'Fruit Costs'
     },
     xAxis: {
       categories: ['Apples', 'Bananas', 'Oranges']
     },
     yAxis: {
       title: {
-        text: 'Fruit eaten'
+        text: 'Fruit bought price'
       }
     },
     series: [{
@@ -73,10 +39,39 @@ export class ChartExampleComponent implements AfterViewInit {
       data: [5, 7, 3]
     }],
   };
-  constructor() { }
+  private communicationService: CommunicationService;
+  private communicationSubject$: BehaviorSubject<IAction>;
 
-  ngAfterViewInit() {
-    console.log(this.container);
-    Highcharts.chart(this.container.nativeElement, this.optVersion2)
+  constructor(route: ActivatedRoute, injector: Injector) {
+    const serviceToken = route.snapshot?.data?.['requiredService'];
+    if (serviceToken) {
+      this.communicationService = injector.get(serviceToken);
+      this.communicationSubject$ = this.communicationService.actionsStream$;
+    }
+  }
+
+  public ngAfterViewInit() {
+    // Highcharts.chart(this.container.nativeElement, this.chartOptions);
+  }
+
+  public ngOnInit(): void {
+    this.currency$ = this.communicationSubject$
+      ?.pipe(filter(action => action?.type === Actions.UpdateCurrency),
+        map((a) => a.currency));
+  }
+
+  public setCommunicationSubject(subject: BehaviorSubject<IAction>): void {
+    console.log('We set CommunicationSubject!!!!');
+    this.communicationSubject$ = subject;
+  }
+
+  public changeCurrency() {
+    const newRandomCurrency = CURRENCIES[Math.floor(Math.random() * CURRENCIES.length)];
+    console.warn('Expected Currency: ' + newRandomCurrency);
+    this.communicationSubject$?.next({
+      type: Actions.UpdateCurrency,
+      currency: newRandomCurrency,
+    });
   }
 }
+

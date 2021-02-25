@@ -1,0 +1,1 @@
+{"version":3,"file":"communication.d.ts","sourceRoot":"/Users/katebabak/Desktop/work/lo-dx/projects/gx-core/src/","sources":["lib/services/communication-service/models/communication.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,UAAU,CAAA;AAElC,8BAAsB,aAAa;IAC1B,uBAAuB,CAAC,CAAC,EAAE,OAAO,GAAG,IAAI;CACjD"}

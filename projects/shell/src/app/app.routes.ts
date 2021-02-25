@@ -1,6 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {loadRemoteModule} from "@angular-architects/module-federation";
+import {InjectionToken} from "@angular/core";
+
+export const FIRST_SERVICE_TOKEN = new InjectionToken<string>("CommunicationService");
 
 export const APP_ROUTES: Routes = [
     {
@@ -19,7 +23,13 @@ export const APP_ROUTES: Routes = [
 
     {
       path: 'charts',
-      loadChildren: () => import('mfChart/Module').then(m => m.ChartExampleModule)
+      loadChildren: () => loadRemoteModule({
+        remoteName: 'mfChart',
+        exposedModule: './Module'
+      }).then(m => m.ChartExampleModule),
+      data: {
+        requiredService: FIRST_SERVICE_TOKEN,
+      }
     },
 
     {
