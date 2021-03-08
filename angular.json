@@ -143,7 +143,15 @@
               "projects/shell/src/favicon.ico",
               "projects/shell/src/assets"
             ],
-            "styles": [],
+            "extractCss": true,
+            "styles": [
+              {
+                "input": "projects/shell/src/app/theme-dark.css",
+                "bundleName": "theme-dark",
+                "lazy": true
+              },
+              "projects/shell/src/styles.css"
+            ],
             "scripts": [],
             "extraWebpackConfig": "projects/shell/webpack.config.js"
           },

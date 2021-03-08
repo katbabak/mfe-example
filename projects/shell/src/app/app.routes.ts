@@ -4,7 +4,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {loadRemoteModule} from "@angular-architects/module-federation";
 import {InjectionToken} from "@angular/core";
 
-export const FIRST_SERVICE_TOKEN = new InjectionToken<string>("CommunicationService");
+export const COMMUNICATION_SERVICE_TOKEN = new InjectionToken<string>("CommunicationService");
 
 export const APP_ROUTES: Routes = [
     {
@@ -12,7 +12,6 @@ export const APP_ROUTES: Routes = [
       component: HomeComponent,
       pathMatch: 'full'
     },
-
 
     // Your route here:
 
@@ -28,7 +27,7 @@ export const APP_ROUTES: Routes = [
         exposedModule: './Module'
       }).then(m => m.ChartExampleModule),
       data: {
-        requiredService: FIRST_SERVICE_TOKEN,
+        // requiredService: COMMUNICATION_SERVICE_TOKEN,
       }
     },
 

@@ -6,7 +6,6 @@
 </ul>
 
 <h2>Currency: {{ (currentCurrency$ | async) }}</h2>
-<h2>Com Subj Curr: {{ (communicationActionSubject$ | async)?.currency }}</h2>
 <button (click)="setDefaultCurrency()">Set Default Currency (CHF)</button>
 <div>
   <h5>Chart 1</h5>

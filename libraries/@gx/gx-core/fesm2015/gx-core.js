@@ -33,7 +33,30 @@ GxCoreComponent.ɵcmp = ɵɵdefineComponent({ type: GxCoreComponent, selectors: 
             }]
     }], null, null); })();
 
+var Actions;
+(function (Actions) {
+    Actions["UpdateCurrency"] = "Update Currency";
+    Actions["NoAction"] = "No Action";
+})(Actions || (Actions = {}));
+
+class CommunicationService {
+    constructor() {
+        this.actionsStream$ = new BehaviorSubject({ type: Actions.NoAction });
+    }
+}
+CommunicationService.ɵfac = function CommunicationService_Factory(t) { return new (t || CommunicationService)(); };
+CommunicationService.ɵprov = ɵɵdefineInjectable({ token: CommunicationService, factory: CommunicationService.ɵfac });
+/*@__PURE__*/ (function () { ɵsetClassMetadata(CommunicationService, [{
+        type: Injectable
+    }], null, null); })();
+
 class GxCoreModule {
+    static forRoot(config) {
+        return {
+            providers: [CommunicationService],
+            ngModule: GxCoreModule,
+        };
+    }
 }
 GxCoreModule.ɵmod = ɵɵdefineNgModule({ type: GxCoreModule });
 GxCoreModule.ɵinj = ɵɵdefineInjector({ factory: function GxCoreModule_Factory(t) { return new (t || GxCoreModule)(); } });
@@ -45,22 +68,6 @@ GxCoreModule.ɵinj = ɵɵdefineInjector({ factory: function GxCoreModule_Factory
                 exports: [GxCoreComponent],
             }]
     }], null, null); })();
-
-class CommunicationService {
-    constructor() {
-        this.actionsStream$ = new BehaviorSubject(null);
-    }
-}
-CommunicationService.ɵfac = function CommunicationService_Factory(t) { return new (t || CommunicationService)(); };
-CommunicationService.ɵprov = ɵɵdefineInjectable({ token: CommunicationService, factory: CommunicationService.ɵfac });
-/*@__PURE__*/ (function () { ɵsetClassMetadata(CommunicationService, [{
-        type: Injectable
-    }], null, null); })();
-
-var Actions;
-(function (Actions) {
-    Actions["UpdateCurrency"] = "Update Currency";
-})(Actions || (Actions = {}));
 
 /*
  * Public API Surface of gx-core

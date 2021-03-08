@@ -12,7 +12,7 @@ import {loadRemoteModule} from "@angular-architects/module-federation";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Actions, CommunicationService, IAction, IMFEComponent} from "gx-core";
 
-import {FIRST_SERVICE_TOKEN} from "./app.routes";
+import {COMMUNICATION_SERVICE_TOKEN} from "./app.routes";
 import {filter, map} from "rxjs/operators";
 
 
@@ -20,7 +20,7 @@ import {filter, map} from "rxjs/operators";
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class AppComponent implements AfterViewInit, OnInit {
+export class AppComponent implements AfterViewInit {
   @ViewChild('chartView1', { read: ViewContainerRef, static: true })
   public chartView1!: ViewContainerRef;
 
@@ -31,25 +31,20 @@ export class AppComponent implements AfterViewInit, OnInit {
   public currentCurrency$: Observable<string>;
 
   public communicationActionSubject$: BehaviorSubject<IAction>;
-  private communicationService: CommunicationService;
+  // private communicationService: CommunicationService;
 
   constructor(
     private injector: Injector,
     private resolver: ComponentFactoryResolver,
+    private communicationService: CommunicationService,
   ) {
-    this.communicationService = injector.get<CommunicationService>(FIRST_SERVICE_TOKEN);
+    // Here we inject service with Token and initialize communication subject
+    // this.communicationService = injector.get<CommunicationService>(COMMUNICATION_SERVICE_TOKEN);
     this.communicationActionSubject$ = this.communicationService.actionsStream$;
     this.currentCurrency$ = this.communicationActionSubject$.pipe(
       filter(action => action?.type === Actions.UpdateCurrency),
       map((a) => a.currency))
 
-  }
-
-  public ngOnInit(): void {
-    this.communicationService?.actionsStream$.pipe()
-      .subscribe((action: IAction) => {
-        console.log(`%c action - ${action?.currency}`, 'background-color: lightblue');
-    })
   }
 
   public ngAfterViewInit(): void {
@@ -65,7 +60,7 @@ export class AppComponent implements AfterViewInit, OnInit {
         // We use ComponentRef<any> because MFE component type is unknown
         const compRef: ComponentRef<IMFEComponent> = viewContainer.createComponent<IMFEComponent>(factory, undefined, this.injector);
         const {instance} = compRef;
-        instance.setCommunicationSubject(this.communicationService.actionsStream$);
+        // instance.setCommunicationSubject(this.communicationService.actionsStream$);
       });
   }
 

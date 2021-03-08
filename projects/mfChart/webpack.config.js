@@ -6,7 +6,8 @@ const sharedMappings = new mf.SharedMappings();
 sharedMappings.register(
   path.join(__dirname, '../../tsconfig.json'),
   [/* mapped paths to share */]);
-
+// [...]
+// Add this line
 module.exports = {
   output: {
     uniqueName: "mfChart"
@@ -25,13 +26,6 @@ module.exports = {
             './Module': './projects/mfChart/src/app/chart-example/chart-example.module.ts',
             './ChartComponent': './projects/mfChart/src/app/chart-example/chart-example.component.ts',
         },
-
-        // For hosts (please adjust)
-        // remotes: {
-        //     "mfe1": "mfe1@http://localhost:3000/remoteEntry.js",
-        //     "shell": "shell@http://localhost:5000/remoteEntry.js",
-
-        // },
 
         shared: {
           "@angular/core": { singleton: true, strictVersion: true },

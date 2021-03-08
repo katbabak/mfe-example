@@ -3,15 +3,16 @@ import { NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import {APP_ROUTES, FIRST_SERVICE_TOKEN} from './app.routes';
+import {APP_ROUTES, COMMUNICATION_SERVICE_TOKEN} from './app.routes';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {CommunicationService} from "gx-core";
+import {CommunicationService, GxCoreModule} from "gx-core";
 
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(APP_ROUTES)
+    RouterModule.forRoot(APP_ROUTES),
+    GxCoreModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -19,10 +20,11 @@ import {CommunicationService} from "gx-core";
     NotFoundComponent
   ],
   providers: [
-    {
-      provide: FIRST_SERVICE_TOKEN,
-      useClass: CommunicationService
-    },
+    // {
+    //   provide: COMMUNICATION_SERVICE_TOKEN,
+    //   useClass: CommunicationService
+    // },
+    // CommunicationService,
   ],
   bootstrap: [AppComponent]
 })

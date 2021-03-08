@@ -39,19 +39,19 @@ export class ChartExampleComponent implements AfterViewInit, OnInit, IMFECompone
       data: [5, 7, 3]
     }],
   };
-  private communicationService: CommunicationService;
+  // private communicationService: CommunicationService;
   private communicationSubject$: BehaviorSubject<IAction>;
 
-  constructor(route: ActivatedRoute, injector: Injector) {
-    const serviceToken = route.snapshot?.data?.['requiredService'];
-    if (serviceToken) {
-      this.communicationService = injector.get(serviceToken);
+  constructor(route: ActivatedRoute, injector: Injector, private communicationService: CommunicationService) {
+    // const serviceToken = route.snapshot?.data?.['requiredService'];
+    // if (serviceToken) {
+    //   this.communicationService = injector.get(serviceToken);
       this.communicationSubject$ = this.communicationService.actionsStream$;
-    }
+    // }
   }
 
   public ngAfterViewInit() {
-    // Highcharts.chart(this.container.nativeElement, this.chartOptions);
+    Highcharts.chart(this.container.nativeElement, this.chartOptions);
   }
 
   public ngOnInit(): void {
@@ -61,13 +61,11 @@ export class ChartExampleComponent implements AfterViewInit, OnInit, IMFECompone
   }
 
   public setCommunicationSubject(subject: BehaviorSubject<IAction>): void {
-    console.log('We set CommunicationSubject!!!!');
-    this.communicationSubject$ = subject;
+    // this.communicationSubject$ = subject;
   }
 
   public changeCurrency() {
     const newRandomCurrency = CURRENCIES[Math.floor(Math.random() * CURRENCIES.length)];
-    console.warn('Expected Currency: ' + newRandomCurrency);
     this.communicationSubject$?.next({
       type: Actions.UpdateCurrency,
       currency: newRandomCurrency,

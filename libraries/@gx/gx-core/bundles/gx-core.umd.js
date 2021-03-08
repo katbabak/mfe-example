@@ -44,9 +44,34 @@
             }], null, null);
     })();
 
+    (function (Actions) {
+        Actions["UpdateCurrency"] = "Update Currency";
+        Actions["NoAction"] = "No Action";
+    })(exports.Actions || (exports.Actions = {}));
+
+    var CommunicationService = /** @class */ (function () {
+        function CommunicationService() {
+            this.actionsStream$ = new rxjs.BehaviorSubject({ type: exports.Actions.NoAction });
+        }
+        return CommunicationService;
+    }());
+    CommunicationService.ɵfac = function CommunicationService_Factory(t) { return new (t || CommunicationService)(); };
+    CommunicationService.ɵprov = i0.ɵɵdefineInjectable({ token: CommunicationService, factory: CommunicationService.ɵfac });
+    /*@__PURE__*/ (function () {
+        i0.ɵsetClassMetadata(CommunicationService, [{
+                type: i0.Injectable
+            }], null, null);
+    })();
+
     var GxCoreModule = /** @class */ (function () {
         function GxCoreModule() {
         }
+        GxCoreModule.forRoot = function (config) {
+            return {
+                providers: [CommunicationService],
+                ngModule: GxCoreModule,
+            };
+        };
         return GxCoreModule;
     }());
     GxCoreModule.ɵmod = i0.ɵɵdefineNgModule({ type: GxCoreModule });
@@ -61,24 +86,6 @@
                     }]
             }], null, null);
     })();
-
-    var CommunicationService = /** @class */ (function () {
-        function CommunicationService() {
-            this.actionsStream$ = new rxjs.BehaviorSubject(null);
-        }
-        return CommunicationService;
-    }());
-    CommunicationService.ɵfac = function CommunicationService_Factory(t) { return new (t || CommunicationService)(); };
-    CommunicationService.ɵprov = i0.ɵɵdefineInjectable({ token: CommunicationService, factory: CommunicationService.ɵfac });
-    /*@__PURE__*/ (function () {
-        i0.ɵsetClassMetadata(CommunicationService, [{
-                type: i0.Injectable
-            }], null, null);
-    })();
-
-    (function (Actions) {
-        Actions["UpdateCurrency"] = "Update Currency";
-    })(exports.Actions || (exports.Actions = {}));
 
     /*
      * Public API Surface of gx-core
